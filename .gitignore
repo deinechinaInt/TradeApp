@@ -3,3 +3,12 @@
 ################################################################################
 
 /.vs
+/TradeApp/.vs/TradeApp
+/TradeApp/TradeApp.Domain/obj
+/TradeApp/TradeApp.Domain/bin/Debug/netstandard2.0
+/TradeApp/TradeApp.Repositories/bin/Debug/netstandard2.1
+/TradeApp/TradeApp.Repositories/obj
+/TradeApp/TradeApp.Services/bin/Debug/netstandard2.1
+/TradeApp/TradeApp.Services/obj
+/TradeApp/TradeApp.Web/bin/Debug/netcoreapp3.1
+/TradeApp/TradeApp.Web/obj
