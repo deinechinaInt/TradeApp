@@ -17,22 +17,31 @@ namespace TradeApp.Repositories
         {
             _tradeAppDbContext = tradeAppDbContext;
         }
-        public IEnumerable<User> AllUsers
+             
+
+        public Task<PaginatedList<User>> GetAllUsersReadyAsync(string sortOrder, string filterString, int? pageNumber, int pageSize)
         {
-            get
+            var users = from u in _tradeAppDbContext.Users
+                        select u;
+
+            if (!string.IsNullOrEmpty(filterString))
             {
-                return _tradeAppDbContext.Users;
+                users = users.Where(s => s.Lastname.Contains(filterString));
             }
+
+            users = sortOrder == "name_desc" ? users.OrderByDescending(s => s.Lastname) : users.OrderBy(s => s.Lastname);
+
+            return PaginatedList<User>.CreateAsync(users.AsNoTracking(), pageNumber ?? 1, pageSize);
+
         }
 
-        public Task<List<User>> GetAllUsersAsync()
+        public async Task<User> AddUserAsync(User user)
         {
-            return _tradeAppDbContext.Users.ToListAsync();
-        }
+            _tradeAppDbContext.Add(user);
+            await _tradeAppDbContext.SaveChangesAsync();
 
-        public User GetUserById(int usersId)
-        {            
-            return _tradeAppDbContext.Users.FirstOrDefault(u => u.Id == usersId);
+            return user;
         }
+      
     }
 }

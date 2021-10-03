@@ -6,10 +6,8 @@ namespace TradeApp.Repositories
 {
     public interface IUserRepository
     {
-        IEnumerable<User> AllUsers { get; }
+        Task<PaginatedList<User>> GetAllUsersReadyAsync(string sortOrder, string filterString, int? pageNumber, int pageSize);
 
-        User GetUserById(int usersId);
-
-        Task<List<User>> GetAllUsersAsync();
+        Task<User> AddUserAsync(User user);
     }
 }

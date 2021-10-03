@@ -12,3 +12,4 @@
 /TradeApp/TradeApp.Services/obj
 /TradeApp/TradeApp.Web/bin/Debug/netcoreapp3.1
 /TradeApp/TradeApp.Web/obj
+/TradeApp/TradeApp.Domain/bin/Debug/netstandard2.1

@@ -12,21 +12,16 @@ namespace TradeApp.Services
         public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
+        }      
+
+        public Task<PaginatedList<User>> GetAllUsersReadyAsync(string sortOrder, string filterString, int? pageNumber, int pageSize)
+        {
+            return _userRepository.GetAllUsersReadyAsync(sortOrder, filterString, pageNumber, pageSize);
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public  Task<User> AddUserAsync(User user)
         {
-            return _userRepository.AllUsers;
-        }
-
-        public Task<List<User>> GetAllUsersAsync()
-        {
-            return _userRepository.GetAllUsersAsync();
-        }
-
-        public User GetUserById(int userId)
-        {
-            return _userRepository.GetUserById(userId);
+            return _userRepository.AddUserAsync( user);
         }
     }
 }
