@@ -42,6 +42,25 @@ namespace TradeApp.Repositories
 
             return user;
         }
+
+        public async Task<User> GetByIdAsync(int? id)
+        {                     
+            return await _tradeAppDbContext.Users
+                .FirstOrDefaultAsync(u => u.Id == id); ;
+        }
       
+
+        public async Task DeleteUserAsync(int id)
+        {
+            var user = await _tradeAppDbContext.Users.FindAsync(id);
+            _tradeAppDbContext.Users.Remove(user);
+            await _tradeAppDbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateUserAsync(User user)
+        {
+            _tradeAppDbContext.Update(user);
+            await _tradeAppDbContext.SaveChangesAsync();            
+        }
     }
 }

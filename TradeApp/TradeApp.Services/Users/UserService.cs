@@ -23,5 +23,21 @@ namespace TradeApp.Services
         {
             return _userRepository.AddUserAsync( user);
         }
+
+        public Task<User> GetByIdAsync(int? id)
+        {
+            return _userRepository.GetByIdAsync(id);
+        }
+      
+
+        public Task DeleteUserAsync(int id)
+        {
+            return _userRepository.DeleteUserAsync(id);
+        }
+
+        public Task UpdateUserAsync(User user)
+        {
+            return _userRepository.UpdateUserAsync(user);
+        }
     }
 }

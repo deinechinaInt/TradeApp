@@ -43,6 +43,7 @@ namespace TradeApp.Web.Controllers
             return View();
         }
 
+        // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FirstName,Lastname,Email")] User user)
@@ -54,5 +55,80 @@ namespace TradeApp.Web.Controllers
                 }            
             return View(user);
         }
+
+        // GET: Users/Details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+
+        // GET: Users/Delete
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        //POST: Users/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _userService.DeleteUserAsync(id);
+            return RedirectToAction(nameof(List));
+        }
+
+
+        // GET: Users/Edit
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Users/Edit        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([Bind("Id,FirstName,Lastname,Email")] User user)
+        {            
+            if (ModelState.IsValid)
+            {
+                await _userService.UpdateUserAsync(user);
+                return RedirectToAction(nameof(List));
+            }
+            return View(user);
+        }
+
     }
 }
